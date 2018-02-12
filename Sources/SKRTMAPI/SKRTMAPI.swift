@@ -39,7 +39,6 @@ public protocol RTMWebSocket {
 public protocol RTMAdapter: class {
     func initialSetup(json: [String: Any], instance: SKRTMAPI)
     func notificationForEvent(_ event: Event, type: EventType, instance: SKRTMAPI)
-    func connectionClosed(with error: Error, instance: SKRTMAPI)
 }
 
 public protocol RTMDelegate: class {
@@ -87,7 +86,7 @@ public final class SKRTMAPI: RTMDelegate {
                 success: {(response) in
                     self.connectWithResponse(response)
                 }, failure: { (error) in
-                    self.adapter?.connectionClosed(with: error, instance: self)
+                    //self.adapter?.connectionClosed(with: error, instance: self)
                 }
             )
         } else {
@@ -98,7 +97,7 @@ public final class SKRTMAPI: RTMDelegate {
                 success: {(response) in
                     self.connectWithResponse(response)
                 }, failure: { (error) in
-                    self.adapter?.connectionClosed(with: error, instance: self)
+                    //self.adapter?.connectionClosed(with: error, instance: self)
                 }
             )
         }
@@ -220,7 +219,7 @@ public final class SKRTMAPI: RTMDelegate {
         if options.reconnect {
             connect()
         } else {
-            adapter?.connectionClosed(with: SlackError.rtmConnectionError, instance: self)
+            //adapter?.connectionClosed(with: SlackError.rtmConnectionError, instance: self)
         }
     }
 
